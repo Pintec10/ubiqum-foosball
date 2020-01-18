@@ -2,7 +2,7 @@
   <v-app>
     <HeaderNav />
     <v-content class="red darken-1">
-      <!--  -->
+      <router-view dark />
     </v-content>
   </v-app>
 </template>
