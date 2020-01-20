@@ -27,9 +27,10 @@ export default new Vuex.Store({
 
       //posting to backend ---CHECK WITH LLUIS TO PROVIDE TOKEN! AND ADAPT TO ACTUAL JSON ---
       fetch(proxy + "/auth/login", {
-        credentials: 'include',
+        // credentials: 'includes',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          "Authorization": "token"
         },
         method: 'POST',
         body: credentials

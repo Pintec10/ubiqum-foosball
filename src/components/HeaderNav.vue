@@ -6,7 +6,8 @@
         contain
         max-height="100%"
         alt="Ubiqum foosball logo"
-        src="@/assets/futbolin_logo_long.jpg"
+        src="@/assets/futbolin_logo_long.svg"
+        class="mx-5 my-10"
       />
       <v-btn icon>
         <v-icon>mdi-account</v-icon>
