@@ -1,4 +1,4 @@
-LIST OF SPRINTS - "branch-name" : views
+LIST OF SPRINTS
 
 1. "initial" : Login, Create account, Navbar/menu
 2. "tournament-global" : Create Tournament, Global list of tournaments
