@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="grey darken-1" dark class="test">
+    <v-app-bar app color="grey darken-4" dark class="test">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-img
         contain
@@ -20,7 +20,7 @@
       absolute
       temporary
       dark
-      color="grey darken-1"
+      color="grey darken-4"
       class="text-uppercase text-center py-5 px-3"
     >
       <v-list-item class="d-flex justify-center">
