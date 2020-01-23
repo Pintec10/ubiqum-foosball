@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HeaderNav />
+    <HeaderNav v-if="$route.path !== '/'" />
     <v-content class="red darken-1">
       <router-view dark />
     </v-content>
