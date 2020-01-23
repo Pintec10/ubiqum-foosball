@@ -20,7 +20,7 @@
 export default {
   name: "home",
   components: {
-    // test
+    //
   },
   data() {
     return {
