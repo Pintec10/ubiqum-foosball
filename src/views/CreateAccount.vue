@@ -1,8 +1,10 @@
 <template>
   <v-container fluid>
     <v-row class="d-flex align-center justify-center">
-      <v-col class="col-12">
-        <p class="mb-0">Create Account</p>
+      <v-col class="col-12 mb-0">
+        <p class="title mb-0">Create account</p>
+        <hr />
+        <p>Create a new account for Ubiqum Foosball.</p>
       </v-col>
 
       <v-col class="col-12 col-sm-6 col-md-12 pa-3 text-center">
@@ -10,59 +12,52 @@
           <v-col class="col-1 col-md-4"></v-col>
           <v-col class="col-10 col-md-4">
             <v-form>
-              <p class="text-left text-uppercase mb-1">Email</p>
               <v-text-field
-                background-color="grey lighten-3"
-                light
-                dense
+                class="mb-5 mt-0"
+                color="white"
                 type="text"
                 v-model="email"
                 label="email"
-                placeholder="Your Team Name"
-                solo
-                filled
-                required
+                placeholder="Your email"
               ></v-text-field>
-              <p class="text-left text-uppercase mb-1">Username</p>
               <v-text-field
-                background-color="grey lighten-3"
-                light
-                dense
+                class="mb-5"
+                color="white"
                 type="text"
                 v-model="username"
                 label="username"
-                placeholder="Your Team Name"
-                solo
-                filled
+                placeholder="Your username"
                 required
               ></v-text-field>
-              <p class="text-left text-uppercase mb-1">Password</p>
-              <v-text-field
-                background-color="grey lighten-3"
-                light
+              <v-file-input
+                class="mb-5"
+                prepend-icon
+                append-icon="mdi-file-image"
+                color="white"
                 dense
+                label="Profile picture"
+                placeholder="Upload profile picture"
+              ></v-file-input>
+
+              <v-text-field
+                class="mb-5"
+                color="white"
                 type="password"
                 v-model="password"
                 label="Password"
                 placeholder="Your Password"
-                solo
-                filled
                 required
               ></v-text-field>
-              <p class="text-left text-uppercase mb-1">Repeat Password</p>
               <v-text-field
-                background-color="grey lighten-3"
-                light
-                dense
+                class="mb-5"
+                color="white"
                 type="password"
                 v-model="passwordValidation"
                 label="PasswordValidation"
                 placeholder="Repeat Your Password"
-                solo
-                filled
                 required
               ></v-text-field>
-              <v-btn outlined class="ma-3">create account</v-btn>
+              <v-btn outlined large class="ma-3">Create account</v-btn>
               <p class="mt-3">
                 <router-link to="/login" class="white--text">or login to your existing account</router-link>
               </p>
