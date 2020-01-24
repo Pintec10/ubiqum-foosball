@@ -12,6 +12,11 @@
         <p>teams joined</p>
       </v-col>
     </v-row>
+    <v-row class="d-flex justify-space-around">
+      <v-btn small color="white" class="red--text text--darken-1">Cancel</v-btn>
+      <v-btn small color="white" class="red--text text--darken-1">Matches</v-btn>
+      <v-btn small color="white" class="red--text text--darken-1">Join</v-btn>
+    </v-row>
   </v-container>
 </template>
 
