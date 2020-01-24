@@ -2,13 +2,16 @@
   <div>
     <v-app-bar app color="grey darken-4" dark class="test">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
       <v-img
+        @click="$router.push('/')"
         contain
         max-height="100%"
         alt="Ubiqum foosball logo"
         src="@/assets/futbolin_logo_long.svg"
         class="mx-5 my-10"
       />
+
       <v-btn icon>
         <v-icon>mdi-account</v-icon>
         <!-- replace icon with profile picture -->
