@@ -4,7 +4,6 @@
       <v-col class="col-12">
         <p class="title mb-0">Login</p>
         <hr />
-
         <p>Enter to your existing account.</p>
       </v-col>
 
@@ -15,7 +14,7 @@
             <v-form>
               <!-- <p class="text-left text-uppercase mb-1">Username</p> -->
               <v-text-field
-                class="mb-10"
+                class="mb-7"
                 color="white"
                 type="text"
                 v-model="username"
@@ -26,16 +25,15 @@
               ></v-text-field>
               <!-- <p class="text-left text-uppercase mb-1">Password</p> -->
               <v-text-field
+                class="mb-7"
                 color="white"
-                dense
                 type="password"
                 v-model="password"
                 label="Password"
                 placeholder="Your Password"
-                regular
                 required
               ></v-text-field>
-              <v-btn outlined large class="ma-5 mt-9">Login</v-btn>
+              <v-btn outlined large class="ma-3">Login</v-btn>
 
               <p class="mt-3">
                 <router-link to="/create-account" class="white--text">Create new account</router-link>

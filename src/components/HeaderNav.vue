@@ -1,7 +1,9 @@
 <template>
   <div>
-    <v-app-bar app color="grey darken-4" dark class="test">
+    <!-- grey darken-3 -->
+    <v-app-bar app color="grey darken-3" dark class="test">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
       <v-img
         contain
         max-height="100%"
@@ -9,6 +11,7 @@
         src="@/assets/futbolin_logo_long.svg"
         class="mx-5 my-10"
       />
+
       <v-btn icon>
         <v-icon>mdi-account</v-icon>
         <!-- replace icon with profile picture -->
@@ -65,7 +68,4 @@ export default {
 </script>
 
 <style>
-.test {
-  border: 1px solid white !important;
-}
 </style>
