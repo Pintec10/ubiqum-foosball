@@ -27,12 +27,16 @@ export default {
 .grad {
   background: linear-gradient(
     -35deg,
-    #f7b99c,
+    #db2b29,
     #f51146,
     #db2b29,
     #f84913,
     #db2b29,
-    #f0bab9
+    #db2b29,
+    #f51146,
+    #db2b29,
+    #f84913,
+    #db2b29
   );
   background-size: 500% 500%;
   animation: gradientFade 8s ease infinite;

@@ -202,32 +202,6 @@ export default {
 </script>
 
 <style scoped>
-.background {
-  background: linear-gradient(
-    -35deg,
-    #f7b99c,
-    #f51146,
-    #db2b29,
-    #f84913,
-    #db2b29,
-    #f0bab9
-  );
-  background-size: 500% 500%;
-  animation: gradientFade 8s ease infinite;
-}
-
-@keyframes gradientFade {
-  0% {
-    background-position: 47% 0%;
-  }
-  50% {
-    background-position: 52% 100%;
-  }
-  100% {
-    background-position: 47% 0%;
-  }
-}
-
 .row {
   margin-right: 0px;
   margin-left: 0px;
