@@ -60,7 +60,8 @@ export default {
         { title: "Home", link: "/" },
         { title: "Tournaments", link: "/tournaments" },
         { title: "Leaderboard", link: "/leaderboard" },
-        { title: "Your Profile", link: "/profile" }
+        { title: "Your Profile", link: "/profile" },
+        { title: "*DEMO tourn. matches", link: "/tournaments/detail/1" }
       ]
     };
   }

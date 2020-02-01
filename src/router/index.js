@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import CreateAccount from '../views/CreateAccount.vue'
 import CreateTournament from '../views/CreateTournament.vue'
 import Tournaments from '../views/Tournaments.vue'
+import SingleTournament from '../views/SingleTournament.vue'
 import Leaderboard from '../views/Leaderboard.vue'
 import Profile from '../views/Profile.vue'
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/tournaments',
     name: 'tournaments',
     component: Tournaments
+  },
+  {
+    path: '/tournaments/detail/:itemID',
+    component: SingleTournament,
+    props: true
   },
   {
     path: '/leaderboard',
