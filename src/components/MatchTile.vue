@@ -8,12 +8,14 @@
       <v-row class="d-flex justify-space-between align-center">
         <v-col class="col-4">
           <SingleTeam :team="matchData.homeTeam" />
+          <!-- will add logic to display winning team badge -->
         </v-col>
         <v-col class="col-1">
           <p>VS</p>
         </v-col>
         <v-col class="col-4">
           <SingleTeam :team="matchData.awayTeam" />
+          <!-- will add logic to display winning team badge -->
         </v-col>
         <v-col class="col-3">
           <button type="button">Results</button>

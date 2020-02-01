@@ -59,9 +59,10 @@ export default {
       items: [
         { title: "Home", link: "/" },
         { title: "Tournaments", link: "/tournaments" },
-        { title: "Leaderboard", link: "/leaderboard" },
+        { title: "Leaderboard", link: "/leaderboard/global" }, //change :itemID
         { title: "Your Profile", link: "/profile" },
-        { title: "*DEMO tourn. matches", link: "/tournaments/detail/1" }
+        { title: "*DEMO tourn. matches", link: "/matches/1" }, //change :itemID
+        { title: "*DEMO tourn. leaderboard", link: "/leaderboard/1" } //change :itemID
       ]
     };
   }

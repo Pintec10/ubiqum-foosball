@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <h1>{{tournamentData.title}}</h1>
+    <!-- will put route condition to change h1 title if viewing global list -->
+    <h2>Next/past matches</h2>
+    <!-- will put condition to change the title in h2 -->
     <MatchList :tournamentData="tournamentData" />
     <div class="text-center">
       <button type="button">Join</button>
