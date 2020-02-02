@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import CreateAccount from '../views/CreateAccount.vue'
 import CreateTournament from '../views/CreateTournament.vue'
+import CreateTeam from '../views/CreateTeam.vue'
 import Tournaments from '../views/Tournaments.vue'
 import MatchListView from '../views/MatchListView.vue'
 import Leaderboard from '../views/Leaderboard.vue'
@@ -24,13 +25,18 @@ const routes = [
   },
   {
     path: '/create-account',
-    name: 'create-account',
+    name: 'createAccount',
     component: CreateAccount
   },
   {
     path: '/create-tournament',
-    name: 'create-tournament',
+    name: 'createTournament',
     component: CreateTournament
+  },
+  {
+    path: '/tournaments/:itemID/create-team', // itemID = {tournament id}
+    name: 'createTeam',
+    component: CreateTeam
   },
   {
     path: '/tournaments',
@@ -44,7 +50,7 @@ const routes = [
     props: true
   },
   {
-    path: '/leaderboard/:itemID',
+    path: '/leaderboard/:itemID', // itemID = {tournament id} OR "global"
     name: 'leaderboard',
     component: Leaderboard,
     props: true

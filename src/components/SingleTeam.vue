@@ -4,6 +4,7 @@
     <v-img :src="team.image"></v-img>
     <div v-show="showMembers">
       <v-avatar class="avatar-left">
+      <!-- you can change v-avatar to div or anything you want without problem! -->
         <img :src="team.player1.image" alt="Profile picture" />
       </v-avatar>
       <v-avatar class="avatar-right">

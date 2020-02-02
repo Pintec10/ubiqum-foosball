@@ -1,12 +1,15 @@
 <template>
   <v-container>
-    <h1>{{tournamentData.title}}</h1>
-    <!-- will put route condition to change h1 title if viewing global list -->
-    <h2>Next/past matches</h2>
+    <h1>Next/past matches</h1>
     <!-- will put condition to change the title in h2 -->
+    <h2 v-if="$route.params.itemID !== 'global'">{{tournamentData.title}}</h2>
+    <!-- will put route condition to change h1 title if viewing global list -->
     <MatchList :tournamentData="tournamentData" />
-    <div class="text-center">
-      <button type="button">Join</button>
+    <div v-if="$route.params.itemID !== 'global'" class="text-center">
+      <button
+        type="button"
+        @click="$router.push('/tournaments/' + $route.params.itemID + '/create-team')"
+      >Join</button>
     </div>
   </v-container>
 </template>
