@@ -31,6 +31,7 @@
               ></v-text-field>
 
               <v-file-input
+                accept="image/*"
                 color="white"
                 prepend-icon
                 append-icon="mdi-file-image"

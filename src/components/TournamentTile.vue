@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container @click="$router.push('/tournaments/detail/' + tournament.id)">
     <v-row>
       <h2 class="title">{{tournament.title}}</h2>
     </v-row>
@@ -32,7 +32,14 @@ export default {
 
   data() {
     return {
-      //
+      //matchList: [
+      //  {
+      //    homeTeamName: "Winstrike",
+      //    homeTeamImage: "https://i.ibb.co/sQHQtQy/team01.jpg",
+      //    awayTeamName: "Get Me Coding",
+      //    awayTeamImage: "https://i.ibb.co/sQHQtQy/team01.jpg"
+      //  }
+      //]
     };
   },
 

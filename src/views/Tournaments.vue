@@ -61,18 +61,20 @@ export default {
       tournamentList: [
         {
           title: "Sugar Rush Tournament",
+          id: 1,
           image: "https://preview.ibb.co/bC5ELQ/alex_min.png",
           teamsJoined: 6,
           teamsMax: 10
         },
         {
           title: "Get me Coding Tournament",
+          id: 1,
           image: "https://preview.ibb.co/bC5ELQ/alex_min.png",
           teamsJoined: 8,
           teamsMax: 15
         },
         {
-          title: "Get me Coding Tournament",
+          title: "Christmas",
           image: "https://preview.ibb.co/bC5ELQ/alex_min.png",
           teamsJoined: 8,
           teamsMax: 15
