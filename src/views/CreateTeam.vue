@@ -8,7 +8,7 @@
           <!-- will check if capture works correctly on smartphone! -->
           <div
             class="img-submit-div d-flex flex-column justify-center align-center"
-            v-on:click="openFileInputDialog"
+            @click="openFileInputDialog"
           >
             <v-icon size="20vmin">mdi-file-image</v-icon>
             <p>click here to upload</p>
@@ -40,7 +40,7 @@
               placeholder="Type teammate's username"
             />
           </div>
-          <input type="submit" value="Create team" />
+          <input type="submit" value="Create team" @click.prevent="createNewTeam" />
         </v-col>
       </v-row>
     </form>
@@ -59,6 +59,10 @@ export default {
   methods: {
     openFileInputDialog() {
       document.getElementById("img-submit-input").click();
+    },
+
+    createNewTeam() {
+      console.log("creating new team");
     }
   }
 };

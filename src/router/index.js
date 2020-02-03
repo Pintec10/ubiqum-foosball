@@ -9,6 +9,7 @@ import Tournaments from '../views/Tournaments.vue'
 import MatchListView from '../views/MatchListView.vue'
 import Leaderboard from '../views/Leaderboard.vue'
 import Profile from '../views/Profile.vue'
+import MyTeams from '../views/MyTeams.vue'
 
 Vue.use(VueRouter)
 
@@ -59,6 +60,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile
+  },
+  {
+    path: '/my-teams',
+    name: 'myTeams',
+    component: MyTeams
   },
 
   //{

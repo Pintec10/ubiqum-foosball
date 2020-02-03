@@ -51,7 +51,7 @@ export default {
             awayTeam: {
               id: 34,
               name: "Get Me Coding",
-              image: "https://i.ibb.co/sQHQtQy/team01.jpg",
+              image: "https://i.ibb.co/DV0GpGx/team02.jpg",
               player1: {
                 id: "135",
                 name: "Lluis G",
@@ -71,7 +71,7 @@ export default {
             homeTeam: {
               id: 56,
               name: "Sugar Rush",
-              image: "https://i.ibb.co/sQHQtQy/team01.jpg",
+              image: "https://i.ibb.co/ydBtdxb/team04.jpg",
               player1: {
                 id: "234",
                 name: "Cel K",
@@ -86,7 +86,7 @@ export default {
             awayTeam: {
               id: 78,
               name: "Funny Faces",
-              image: "https://i.ibb.co/sQHQtQy/team01.jpg",
+              image: "https://i.ibb.co/nkDXjsB/team03.png",
               player1: {
                 id: "357",
                 name: "Llu G",

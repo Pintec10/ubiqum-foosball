@@ -48,7 +48,7 @@ export default {
           {
             id: 56,
             name: "Sugar Rush",
-            image: "https://i.ibb.co/sQHQtQy/team01.jpg",
+            image: "https://i.ibb.co/ydBtdxb/team04.jpg",
             score: 11,
             player1: {
               id: "234",
@@ -64,7 +64,7 @@ export default {
           {
             id: 78,
             name: "Funny Faces",
-            image: "https://i.ibb.co/sQHQtQy/team01.jpg",
+            image: "https://i.ibb.co/nkDXjsB/team03.png",
             score: 3,
             player1: {
               id: "357",
