@@ -17,7 +17,27 @@
             </v-avatar>
             <p>{{oneItem.name}}</p>
           </div>
-          <SingleTeam v-else :team="oneItem" />
+
+          <!-- -->
+          <v-expansion-panels v-else flat>
+            <v-expansion-panel class="transparent">
+              <v-expansion-panel-header class="pa-0 transparent">
+                <div>
+                  <SingleTeam :team="oneItem" />
+                </div>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-avatar>
+                  <img :src="oneItem.player1.image" alt="Profile picture" />
+                </v-avatar>
+                <v-avatar>
+                  <img :src="oneItem.player1.image" alt="Profile picture" />
+                </v-avatar>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <!-- -->
         </v-col>
         <v-col class="col-2 d-flex flex-column justify-center align-center">
           <p>{{oneItem.score}}</p>
