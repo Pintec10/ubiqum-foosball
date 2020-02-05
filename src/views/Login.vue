@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="px-auto">
+  <v-container>
     <v-row>
       <v-col class="col-12">
         <p class="title mb-0">Login</p>
@@ -63,8 +63,8 @@ export default {
 </script>
 
 <style>
-.title {
+/* .title {
   font-style: black;
   font-weight: 800;
-}
+} */
 </style>

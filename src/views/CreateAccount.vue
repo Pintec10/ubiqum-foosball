@@ -57,7 +57,7 @@
                 placeholder="Repeat Your Password"
                 required
               ></v-text-field>
-              <v-btn outlined large class="ma-3">Create account</v-btn>
+              <v-btn outlined large class="ma-3">Create A</v-btn>
               <p class="mt-3">
                 <router-link to="/login" class="white--text">or login to your existing account</router-link>
               </p>

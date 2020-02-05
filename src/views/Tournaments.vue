@@ -1,8 +1,17 @@
 <template>
-  <v-container fluid class="px-5">
-    <v-row>
-      <v-col class="col-4">
+  <v-container>
+    <v-row class="d-flex justify-space-between">
+      <v-col class="col-12 titlecolumn">
+        <p class="title mb-0">Tournaments</p>
+        <hr />
+        <p>Find, create or join a tournament.</p>
+      </v-col>
+    </v-row>
+
+    <v-row class="search-filter">
+      <v-col class="col-5">
         <v-select
+          class="filter-btn"
           dense
           color="white"
           :items="filterOptions"
@@ -10,8 +19,9 @@
           label="Filter Tournaments"
         ></v-select>
       </v-col>
-      <v-col class="col-8">
+      <v-col class="col-7">
         <v-text-field
+          id="search-field"
           color="white"
           dense
           type="text"
@@ -23,25 +33,29 @@
       </v-col>
     </v-row>
 
-    <v-row class="d-flex justify-space-between">
-      <h1 class="headline">Tournaments</h1>
-      <v-btn
-        to="/create-tournament"
-        color="white"
-        class="red--text text--darken-1"
-      >Create Tournament</v-btn>
+    <v-row>
+      <v-col class="col-12">
+        <v-btn
+          to="/create-tournament"
+          color="white"
+          class="red--text text--darken-1"
+        >Create Tournament</v-btn>
+      </v-col>
     </v-row>
 
-    <v-row v-for="(tournament, i) in tournamentList" :key="i">
-      <TournamentTile :tournament="tournament" />
-    </v-row>
-
-    <v-row class="d-flex justify-center">
-      <v-btn
-        to="/create-tournament"
-        color="white"
-        class="red--text text--darken-1"
-      >Create Tournament</v-btn>
+    <v-col class="col-12">
+      <v-row v-for="(tournament, i) in tournamentList" :key="i">
+        <TournamentTile :tournament="tournament" />
+      </v-row>
+    </v-col>
+    <v-row>
+      <v-col class="col-12">
+        <v-btn
+          to="/create-tournament"
+          color="white"
+          class="red--text text--darken-1"
+        >Create Tournament</v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -72,7 +86,7 @@ export default {
           teamsMax: 15
         },
         {
-          title: "Get me Coding Tournament",
+          title: "Girls do it better",
           image: "https://preview.ibb.co/bC5ELQ/alex_min.png",
           teamsJoined: 8,
           teamsMax: 15
@@ -87,4 +101,38 @@ export default {
 </script>
 
 <style>
+#search-field {
+  padding-top: 18px;
+}
+
+#list-31.theme--dark.v-list {
+  background: #ffffff;
+}
+
+#filter-btn.v-list-item--dense .v-list-item__title,
+.v-list-item--dense .v-list-item__subtitle,
+.v-list--dense .v-list-item .v-list-item__title,
+.v-list--dense .v-list-item .v-list-item__subtitle {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: darkslategray;
+}
+.theme--dark.v-list {
+  background: #ffffff;
+}
+.v-application--is-ltr .v-text-field .v-label {
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+  font-size: large;
+}
+
+.search-filter {
+  padding-top: 15px;
+  background-color: #ffffff33;
+}
+
+.titlecolumn {
+  padding-bottom: 0px;
+}
 </style>
