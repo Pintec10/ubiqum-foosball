@@ -62,8 +62,13 @@ export default {
       items: [
         { title: "Home", link: "/" },
         { title: "Tournaments", link: "/tournaments" },
-        { title: "Leaderboard", link: "/leaderboard" },
-        { title: "Your Profile", link: "/profile" }
+        { title: "Matches", link: "/matches/global" },
+        { title: "Leaderboard", link: "/leaderboard/global" },
+        { title: "My Profile", link: "/profile" },
+        { title: "My Teams", link: "/my-teams" },
+        { title: "*DEMO tourn. matches", link: "/matches/1" }, //change :itemID
+        { title: "*DEMO tourn. leaderboard", link: "/leaderboard/1" }, //change :itemID
+        { title: "*DEMO create team", link: "/tournaments/1/create-team" } //change :itemID
       ]
     };
   }

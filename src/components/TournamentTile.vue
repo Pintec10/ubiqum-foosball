@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container" @click="$router.push('/tournaments/detail/' + tournament.id)">
     <div>
       <h2>{{tournament.title}}</h2>
     </div>
     <div class="image-row">
       <div class="img">
-        <img src="../assets/team01.jpg" />
+        <img :src="tournament.image" />
       </div>
       <div class="aligner">
         <p class="nr aligner-item">{{tournament.teamsJoined}}/{{tournament.teamsMax}}</p>
@@ -35,7 +35,14 @@ export default {
 
   data() {
     return {
-      //
+      //matchList: [
+      //  {
+      //    homeTeamName: "Winstrike",
+      //    homeTeamImage: "https://i.ibb.co/sQHQtQy/team01.jpg",
+      //    awayTeamName: "Get Me Coding",
+      //    awayTeamImage: "https://i.ibb.co/sQHQtQy/team01.jpg"
+      //  }
+      //]
     };
   },
 

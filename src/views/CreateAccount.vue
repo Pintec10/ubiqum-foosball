@@ -72,7 +72,16 @@
 
 <script>
 export default {
-  name: "create-account"
+  name: "create-account",
+
+  data() {
+    return {
+      email: "",
+      username: "",
+      password: "",
+      passwordValidation: ""
+    };
+  }
 };
 </script>
 
