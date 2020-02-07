@@ -4,6 +4,19 @@
     <!-- will put condition to change the title in h2 -->
     <h2 v-if="$route.params.itemID !== 'global'">{{tournamentData.title}}</h2>
     <!-- will put route condition to change h1 title if viewing global list -->
+
+    <v-row>
+      <v-col class="col-12">
+        <v-select
+          dense
+          color="white"
+          :items="filterOptions"
+          v-model="selectedFilter"
+          label="Filter Matches"
+        ></v-select>
+      </v-col>
+    </v-row>
+
     <MatchList :tournamentData="tournamentData" />
     <div v-if="$route.params.itemID !== 'global'" class="text-center">
       <button
@@ -23,6 +36,8 @@ export default {
   },
   data() {
     return {
+      selectedFilter: "All",
+      filterOptions: ["All", "Next", "Past"],
       tournamentData: {
         // MOCK DATA FOR TESTING - TO COMPARE WITH LLUIS' JSON
         id: 1,
