@@ -2,7 +2,7 @@
   <v-app>
     <HeaderNav v-if="$route.path !== '/'" />
     <v-content class="grad">
-      <router-view dark />
+      <router-view />
     </v-content>
   </v-app>
 </template>
@@ -52,5 +52,10 @@ export default {
   100% {
     background-position: 47% 0%;
   }
+}
+
+.title {
+  font-style: black;
+  font-weight: 800;
 }
 </style>
