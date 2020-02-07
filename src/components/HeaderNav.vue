@@ -13,10 +13,10 @@
         class="mx-5 my-10"
       />
 
-      <v-btn icon>
-        <v-icon>mdi-account</v-icon>
-        <!-- replace icon with profile picture -->
-      </v-btn>
+      <v-avatar>
+        <img v-if="getAuthenticatedUser" :src="getAuthenticatedUser.avatar" alt="Profile picture" />
+        <v-icon v-else>mdi-account</v-icon>
+      </v-avatar>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -71,12 +72,11 @@ export default {
         { title: "*DEMO create team", link: "/tournaments/1/create-team" } //change :itemID
       ]
     };
+  },
+
+  computed: {
+    ...mapGetters(["getAuthenticatedUser"])
   }
-  // methods: {
-  //   changeColorClick() {
-  //     document.getElementById("demo").style.color = "red";
-  //   }
-  // }
 };
 </script>
 

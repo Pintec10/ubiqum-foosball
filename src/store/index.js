@@ -1,22 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from "axios";
 
-const proxy = "https://infinite-shore-25867.herokuapp.com"
+const proxy = "https://enigmatic-cove-90612.herokuapp.com"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loggedUser: null
+    errorMessage: "",
+    authenticatedUser: null,
   },
+
   getters: {
-    loggedUser: state => { return state.loggedUser; },
+    getAuthenticatedUser: state => { return state.authenticatedUser; },
+    getErrorMessage: state => { return state.errorMessage; },
   },
+
   mutations: {
     login: (state, payload) => {
       state.loggedUser = payload; //CHECK BASED ON ACTUAL JSON
+    },
+    setErrorMessage: (state, payload) => {
+      state.errorMessage = payload; //CHECK BASED ON ACTUAL JSON
+    },
+    setAuthenticatedUser: (state, payload) => {
+      state.authenticatedUser = { ...payload };
     }
   },
+
   actions: {
     login: (context, payload) => {
       //build JSON for posting to backend
@@ -25,29 +37,50 @@ export default new Vuex.Store({
         password: payload.password
       }
 
-      //posting to backend ---CHECK WITH LLUIS TO PROVIDE TOKEN! AND ADAPT TO ACTUAL JSON ---
-      fetch(proxy + "/auth/login", {
-        // credentials: 'includes',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          "Authorization": "token"
-        },
-        method: 'POST',
-        body: credentials
-      })
-        .then(resp => {
-          return resp.json();
+      //encode credentials for URI
+      function encodeBody(jsondata) {
+        var body = [];
+        for (var key in jsondata) {
+          var encKey = encodeURIComponent(key);
+          var encVal = encodeURIComponent(jsondata[key]);
+          body.push(encKey + "=" + encVal);
+        }
+        return body.join("&");
+      }
+
+      //posting to backend 
+      axios.post(proxy + "/auth/login",
+        encodeBody(credentials),
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            //"Authorization": "token"
+          }
         })
-        .then(json => {
-          context.commit("login", json)
+        .then(response => {
+          context.commit("setErrorMessage", "");
+          localStorage.setItem("ubiqumFoosballUserToken", response.data.token);
+          context.dispatch("fetchAuthenticatedUser");
         })
         .catch(error => {
-          alert(error);
+          context.commit("setErrorMessage", error.response.data.message);
+        });
+    },
+
+    fetchAuthenticatedUser(context) {
+      let token = localStorage.getItem("ubiqumFoosballUserToken");
+      axios.get(proxy + "/auth/currentUser", {
+        headers: { "Authorization": token }
+      })
+        .then(response => {
+          context.commit("setAuthenticatedUser", response.data.user);
         })
-
-
+        .catch(error => {
+          context.commit("setErrorMessage", error.response.data.message);
+        });
     }
   },
+
   modules: {
   }
 })

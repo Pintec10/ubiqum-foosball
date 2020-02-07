@@ -1,0 +1,85 @@
+// POST LOGIN
+{
+    "success": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTIzNDE5MzVjOTQwYjAwMTcxYjE0ZGEiLCJpYXQiOjE1ODA5OTMzNTAsImV4cCI6MTU4MTA3OTc1MH0.m24D6heNHNAGQ2Q0a0-HxAhZeb-LTDhLv0zX7i0kN50"
+}
+// GET CURRENT USER
+{
+    "success": true,
+    "user": {
+        "_id": "5e2341935c940b00171b14da",
+        "username": "Testman",
+        "email": "test@gmail.com",
+        "avatar": "https://gravatar.com/avatar/23c1de9e69d4d133bd052306c7ff3571?d=identicon"
+    }
+}
+// GET TOURNAMENTS
+{
+    "success": true,
+    "tournaments": [
+        {
+            "state": "OPEN",
+            "creationDate": "2020-02-06T14:40:08.766Z",
+            "_id": "5e3c29f7c44a2700170e37ec",
+            "title": "Test Tournament",
+            "passcode": "testtournament",
+            "admin": "5e2341935c940b00171b14da",
+            "teamlessPlayers": [
+                {
+                    "joinDate": "2020-02-06T14:40:08.766Z",
+                    "_id": "5e3c29f7c44a2700170e37ed",
+                    "player": "5e2341935c940b00171b14da"
+                }
+            ],
+            "__v": 0
+        },
+        {
+            "state": "OPEN",
+            "creationDate": "2020-02-06T14:40:08.766Z",
+            "_id": "5e3c2a71c44a2700170e37ee",
+            "title": "Christmas",
+            "passcode": "christmas",
+            "admin": "5e2341935c940b00171b14da",
+            "teamlessPlayers": [
+                {
+                    "joinDate": "2020-02-06T14:40:08.766Z",
+                    "_id": "5e3c2a71c44a2700170e37ef",
+                    "player": "5e2341935c940b00171b14da"
+                }
+            ],
+            "__v": 0
+        }
+    ]
+}
+//GET TEAMS
+{
+    "success": true,
+    "teams": [
+        {
+            "players": [
+                "5e3c2896c44a2700170e37eb",
+                "5e3c2e65c44a2700170e37f6"
+            ],
+            "creationDate": "2020-02-06T14:40:08.806Z",
+            "_id": "5e3c3776c44a2700170e37fe",
+            "name": "The Frontenders",
+            "abbr": "FRE",
+            "tournament": "5e3c29f7c44a2700170e37ec",
+            "admin": "5e3c2896c44a2700170e37eb",
+            "__v": 1
+        },
+        {
+            "players": [
+                "5e3c30ccc44a2700170e37f7",
+                "5e3c355ec44a2700170e37fb"
+            ],
+            "creationDate": "2020-02-06T16:49:04.480Z",
+            "_id": "5e3c44a546b2b2001774ef03",
+            "name": "The Backenders",
+            "abbr": "BAK",
+            "tournament": "5e3c29f7c44a2700170e37ec",
+            "admin": "5e3c30ccc44a2700170e37f7",
+            "__v": 1
+        }
+    ]
+}

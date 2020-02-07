@@ -1,0 +1,38 @@
+*** TEST USERS
+username: Testman
+email: testman@gmail.com
+password: testman
+bearer token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTIzNDE5MzVjOTQwYjAwMTcxYjE0ZGEiLCJpYXQiOjE1ODA5OTcxMzYsImV4cCI6MTU4MTA4MzUzNn0.79z77FTxUsf_L2_Qy08wawGYluudLVWUh-O5ck09bd4
+
+username: Roberto M
+email: roberto@email.com
+password: roberto
+bearer token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTNjMjg5NmM0NGEyNzAwMTcwZTM3ZWIiLCJpYXQiOjE1ODEwMDA4NTQsImV4cCI6MTU4MTA4NzI1NH0.oynLXfMOLri03uHfV74r8jL0Im1Efgn73-cZXFfyUB8
+
+username: Celina M
+email: celina@email.com
+password: celina
+bearer token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTNjMmU2NWM0NGEyNzAwMTcwZTM3ZjYiLCJpYXQiOjE1ODEwMDI0ODgsImV4cCI6MTU4MTA4ODg4OH0.vvazGvGR2tx0d1EbNZs8JzJDbXbRcLh4YL2an85jsNI
+id: 5e3c2e65c44a2700170e37f6
+
+username: Lluis G
+email: lluis@email.com
+password: lluis
+bearer token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTNjMzBjY2M0NGEyNzAwMTcwZTM3ZjciLCJpYXQiOjE1ODEwMDI5NTYsImV4cCI6MTU4MTA4OTM1Nn0.nCs8CNVXFqptaznHg7lyiBoCByFc0sx4mPvExuQBEsk
+
+username: Vasil M
+email: vasil@email.com
+password: vasil
+bearer token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTNjMzU1ZWM0NGEyNzAwMTcwZTM3ZmIiLCJpYXQiOjE1ODEwMDQxMjYsImV4cCI6MTU4MTA5MDUyNn0.YYb-6CmqTt6pTQEQEy1il8v9RSm5dnyNXUoEG0W8Vlo
+id: 5e3c355ec44a2700170e37fb
+
+
+*** TOURNAMENTS
+title: Christmas
+passcode: christmas
+
+title: Test Tournament
+passcode: testtournament
+
+title: Started Tournament
+passcode: startedtournament

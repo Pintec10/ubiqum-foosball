@@ -20,5 +20,10 @@ yarn-error.log*
 *.sln
 *.sw?
 
-# Materials foolder
+# Materials folder
 _materials
+
+# various notes
+testjson
+TestBed
+ToDo
