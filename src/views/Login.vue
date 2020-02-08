@@ -32,10 +32,11 @@
                 placeholder="Your Password"
                 required
               ></v-text-field>
-              <p v-if="getErrorMessage">
-                <v-icon>mdi-alert</v-icon>
-                {{getErrorMessage}}
-              </p>
+              <!-- <p v-if="getNotification">
+                <v-icon v-if="getNotification.type === 'error'">mdi-alert</v-icon>
+                {{getNotification.message}}
+              </p>-->
+              <Notification />
 
               <v-btn outlined large class="ma-3" @click="login(credentials)">Login</v-btn>
 
@@ -52,13 +53,13 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { mapMutations } from "vuex";
-import { mapGetters } from "vuex";
+import { mapActions, mapMutations, mapGetters } from "vuex";
+import Notification from "@/components/Notification.vue";
+
 export default {
   name: "login",
   components: {
-    //
+    Notification
   },
   data() {
     return {
@@ -71,15 +72,11 @@ export default {
 
   methods: {
     ...mapActions(["login"]),
-    ...mapMutations(["setErrorMessage"])
+    ...mapMutations(["setNotification"])
   },
 
   computed: {
-    ...mapGetters(["getErrorMessage"])
-  },
-
-  created() {
-    this.setErrorMessage("");
+    ...mapGetters(["getNotification"])
   }
 };
 </script>

@@ -57,7 +57,16 @@
                 placeholder="Repeat Your Password"
                 required
               ></v-text-field>
-              <v-btn outlined large class="ma-3">Create A</v-btn>
+
+              <Notification />
+
+              <v-btn
+                outlined
+                large
+                class="ma-3"
+                @click="validateForm"
+                :loading="loading"
+              >Create Account</v-btn>
               <p class="mt-3">
                 <router-link to="/login" class="white--text">or login to your existing account</router-link>
               </p>
@@ -71,16 +80,114 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from "vuex";
+import Notification from "@/components/Notification.vue";
+import axios from "axios";
+import router from "@/router";
+
+const proxy = "https://enigmatic-cove-90612.herokuapp.com";
+
 export default {
   name: "create-account",
+
+  components: {
+    Notification
+  },
 
   data() {
     return {
       email: "",
       username: "",
       password: "",
-      passwordValidation: ""
+      passwordValidation: "",
+      loading: false
     };
+  },
+
+  methods: {
+    ...mapMutations(["setNotification"]),
+    ...mapActions(["fetchAuthenticatedUser"]),
+
+    validateForm() {
+      if (!this.username || !this.email || !this.password) {
+        this.setNotification({
+          type: "error",
+          message: "Please fill in all required fields"
+        });
+      } else if (this.validateEmail !== true) {
+        this.setNotification({ type: "error", message: this.validateEmail });
+      } else if (this.validatePassword !== true) {
+        this.setNotification({ type: "error", message: this.validatePassword });
+      } else {
+        this.setNotification(null);
+
+        //if all checks ok, proceed to account creation
+        let accountData = {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          passwordValidation: this.passwordValidation
+        };
+        this.createAccount(accountData);
+      }
+    },
+
+    createAccount(payload) {
+      this.loading = true;
+      //encoding account data for URI
+      function encodeBody(jsondata) {
+        var body = [];
+        for (var key in jsondata) {
+          var encKey = encodeURIComponent(key);
+          var encVal = encodeURIComponent(jsondata[key]);
+          body.push(encKey + "=" + encVal);
+        }
+        return body.join("&");
+      }
+
+      //posting to backend
+      axios
+        .post(proxy + "/auth/signup", encodeBody(payload), {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        })
+        .then(response => {
+          this.loading = false;
+          this.setNotification({
+            type: "success",
+            message: "Account created!"
+          });
+          localStorage.setItem("ubiqumFoosballUserToken", response.data.token);
+          this.fetchAuthenticatedUser();
+        })
+        .then(() => {
+          setTimeout(function() {
+            router.push("/tournaments");
+          }, 2500);
+        })
+        .catch(error => {
+          this.loading = false;
+          this.setNotification({
+            type: "error",
+            message: error.response.data.message
+          });
+        });
+    }
+  },
+
+  computed: {
+    ...mapGetters(["getNotification"]),
+
+    validateEmail() {
+      return /.+@.+\..+/.test(this.email) ? true : "Email not valid";
+    },
+
+    validatePassword() {
+      return this.password === this.passwordValidation
+        ? true
+        : "Passwords not matching";
+    }
   }
 };
 </script>
