@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
-import router from '@/router'
+//import router from '@/router'
 
 const proxy = "https://enigmatic-cove-90612.herokuapp.com"
 
@@ -11,11 +11,15 @@ export default new Vuex.Store({
   state: {
     notification: null,
     authenticatedUser: null,
+    tournamentList: null,
+    teamList: null,
   },
 
   getters: {
     getAuthenticatedUser: state => { return state.authenticatedUser; },
     getNotification: state => { return state.notification; },
+    getTournamentList: state => { return state.tournamentList; },
+    getTeamList: state => { return state.teamList; },
   },
 
   mutations: {
@@ -29,7 +33,13 @@ export default new Vuex.Store({
     },
     setAuthenticatedUser: (state, payload) => {
       state.authenticatedUser = { ...payload };
-    }
+    },
+    setTournamentList: (state, payload) => {
+      state.tournamentList = payload;
+    },
+    setTeamList: (state, payload) => {
+      state.teamList = payload;
+    },
   },
 
   actions: {
@@ -78,53 +88,47 @@ export default new Vuex.Store({
           context.commit("setAuthenticatedUser", response.data.user);
         })
         .catch(error => {
-          context.commit("setNotification", { type: "error", message: error.response.data.message });
+          let errorMessage = "";
+          if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          } else {
+            errorMessage = "Could not get current user"
+          }
+          //context.commit("setNotification", { type: "error", message: error.response.data.message });
+          alert(errorMessage);
         });
     },
 
-    createAccount(context, payload) {
-      //encoding account data for URI
-      function encodeBody(jsondata) {
-        var body = [];
-        for (var key in jsondata) {
-          var encKey = encodeURIComponent(key);
-          var encVal = encodeURIComponent(jsondata[key]);
-          body.push(encKey + "=" + encVal);
-        }
-        return body.join("&");
-      }
-
-      //posting to backend
-      axios.post(proxy + "/auth/signup",
-        encodeBody(payload),
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          }
-        }
-      )
+    fetchTournamentList(context) {
+      axios.get(proxy + "/tournaments")
         .then(response => {
-          context.commit("setNotification", { type: "success", message: "Account created!" });
-          localStorage.setItem("ubiqumFoosballUserToken", response.data.token);
-          context.dispatch("fetchAuthenticatedUser");
-        })
-        .then(() => {
-          setTimeout(function () { router.push("/tournaments") }, 2500);
+          context.commit("setTournamentList", response.data.tournaments)
         })
         .catch(error => {
-          context.commit("setNotification", { type: "error", message: error.response.data.message });
-        })
+          let errorMessage = "";
+          if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          } else {
+            errorMessage = "Could not get the list of tournaments, please try later"
+          }
+          context.commit("setNotification", { type: "error", message: errorMessage });
+        });
     },
 
-    encodeURI(jsondata) {
-      console.log("encoding....");
-      var output = [];
-      for (var key in jsondata) {
-        var encKey = encodeURIComponent(key);
-        var encVal = encodeURIComponent(jsondata[key]);
-        output.push(encKey + "=" + encVal);
-      }
-      return output.join("&");
+    fetchTeamList(context) {
+      axios.get(proxy + "/teams")
+        .then(response => {
+          context.commit("setTeamList", response.data.teams);
+        })
+        .catch(error => {
+          let errorMessage = "";
+          if (error.response.data.message) {
+            errorMessage = error.response.data.message;
+          } else {
+            errorMessage = "Could not get the list of teams, please try later"
+          }
+          context.commit("setNotification", { type: "error", message: errorMessage });
+        })
     }
   },
 

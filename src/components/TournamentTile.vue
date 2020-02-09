@@ -1,14 +1,17 @@
 <template>
   <div class="container" @click="$router.push('/tournaments/detail/' + tournament.id)">
+    tile
     <div>
       <h2>{{tournament.title}}</h2>
     </div>
     <div class="image-row">
       <div class="img">
-        <img :src="tournament.image" />
+        <img src="https://i.ibb.co/sQHQtQy/team01.jpg" />
+        <!-- image will be fixed when backend completed -->
       </div>
       <div class="aligner">
-        <p class="nr aligner-item">{{tournament.teamsJoined}}/{{tournament.teamsMax}}</p>
+        <p class="nr aligner-item">{{teamsCount}} / 99</p>
+        <!-- max nr of teams will be fixed when backend completed -->
         <p class="teams-joined-text aligner-item">teams joined</p>
       </div>
     </div>
@@ -28,32 +31,20 @@ export default {
   name: "tournamentTile",
 
   props: {
-    tournament: {
-      type: Object
-    }
+    tournament: Object,
+    tournamentTeams: Array
   },
 
   data() {
     return {
-      //matchList: [
-      //  {
-      //    homeTeamName: "Winstrike",
-      //    homeTeamImage: "https://i.ibb.co/sQHQtQy/team01.jpg",
-      //    awayTeamName: "Get Me Coding",
-      //    awayTeamImage: "https://i.ibb.co/sQHQtQy/team01.jpg"
-      //  }
-      //]
+      //
     };
   },
 
-  methods: {
-    //imgUrl(url) {
-    //  //return require("'" + url + "'");
-    //  console.log(url);
-    //  //let urlqui = "../assets/team01.jpg";
-    //
-    //  return require(this.oggetto.oggurl);
-    //}
+  computed: {
+    teamsCount() {
+      return this.tournamentTeams.length;
+    }
   }
 };
 </script>

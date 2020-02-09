@@ -15,7 +15,7 @@
           dense
           color="white"
           :items="filterOptions"
-          v-model="selectedFilter"
+          v-model="statusFilter"
           label="Filter Tournaments"
         ></v-select>
       </v-col>
@@ -25,7 +25,7 @@
           color="white"
           dense
           type="text"
-          v-model="enteredSearch"
+          v-model="searchFilter"
           label="Search by name"
           placeholder
           prepend-icon="mdi-magnify"
@@ -43,12 +43,19 @@
       </v-col>
     </v-row>
 
+    <Notification />
+
     <v-col class="col-12">
-      <v-row v-for="(tournament, i) in tournamentList" :key="i">
-        <TournamentTile :tournament="tournament" />
+      <v-row v-for="(tournament, i) in filteredTournamentList" :key="i">
+        <TournamentTile
+          v-if="getTeamList"
+          :tournament="tournament"
+          :tournamentTeams="tournamentTeams(tournament)"
+        />
       </v-row>
     </v-col>
-    <v-row>
+
+    <v-row v-show="filteredTournamentList.length > 0">
       <v-col class="col-12">
         <v-btn
           to="/create-tournament"
@@ -62,43 +69,63 @@
 
 <script>
 import TournamentTile from "@/components/TournamentTile.vue";
+import { mapGetters, mapActions } from "vuex";
+import Notification from "@/components/Notification.vue";
 
 export default {
   name: "tournaments",
 
   components: {
-    TournamentTile
+    TournamentTile,
+    Notification
   },
 
   data() {
     return {
-      tournamentList: [
-        {
-          title: "Sugar Rush Tournament",
-          id: 1,
-          image: "https://preview.ibb.co/bC5ELQ/alex_min.png",
-          teamsJoined: 6,
-          teamsMax: 10
-        },
-        {
-          title: "Get me Coding Tournament",
-          id: 1,
-          image: "https://preview.ibb.co/bC5ELQ/alex_min.png",
-          teamsJoined: 8,
-          teamsMax: 15
-        },
-        {
-          title: "Girls do it better",
-
-          image: "https://preview.ibb.co/bC5ELQ/alex_min.png",
-          teamsJoined: 8,
-          teamsMax: 15
-        }
-      ],
-      selectedFilter: "All",
-      enteredSearch: "",
-      filterOptions: ["All", "Open", "Closed"]
+      statusFilter: "All",
+      searchFilter: "",
+      filterOptions: ["All", "Open", "Ongoing", "Closed"]
     };
+  },
+
+  methods: {
+    ...mapActions(["fetchTournamentList", "fetchTeamList"]),
+
+    tournamentTeams(tournament) {
+      let teamsArray = [];
+      this.getTeamList.filter(oneTeam => {
+        if (oneTeam.tournament == tournament["_id"]) {
+          teamsArray.push(oneTeam);
+        }
+      });
+      return teamsArray;
+    }
+  },
+
+  computed: {
+    ...mapGetters(["getTournamentList", "getTeamList"]),
+
+    filteredTournamentList() {
+      let filteredList = this.getTournamentList
+        .filter(oneTournament => {
+          return (
+            oneTournament.state == this.statusFilter.toUpperCase() ||
+            this.statusFilter === "All"
+          );
+        })
+        .filter(oneTournament => {
+          return oneTournament.title
+            .toUpperCase()
+            .includes(this.searchFilter.toUpperCase());
+        });
+
+      return filteredList;
+    }
+  },
+
+  created() {
+    this.fetchTournamentList();
+    this.fetchTeamList();
   }
 };
 </script>
