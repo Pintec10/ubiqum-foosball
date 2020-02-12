@@ -4,15 +4,15 @@ import axios from "axios";
 import router from '@/router'
 
 const proxy = "https://enigmatic-cove-90612.herokuapp.com"
-const encodeToURI = function (jsondata) {
-  var body = [];
-  for (var key in jsondata) {
-    var encKey = encodeURIComponent(key);
-    var encVal = encodeURIComponent(jsondata[key]);
-    body.push(encKey + "=" + encVal);
-  }
-  return body.join("&");
-}
+//const encodeToURI = function (jsondata) {
+//  var body = [];
+//  for (var key in jsondata) {
+//    var encKey = encodeURIComponent(key);
+//    var encVal = encodeURIComponent(jsondata[key]);
+//    body.push(encKey + "=" + encVal);
+//  }
+//  return body.join("&");
+//}
 
 Vue.use(Vuex)
 
@@ -151,31 +151,25 @@ export default new Vuex.Store({
         })
     },
 
-    createTournament(context, payload) {
-      axios.post(proxy + "/tournaments", encodeToURI(payload), {
-        headers: { "Authorization": localStorage.getItem("ubiqumFoosballUserToken") }
-      })
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error.response.data.message);
-        })
-    },
-
-    deleteTournament() {
+    deleteTournament(context, payload) {
       console.log("deleting tournament")
-      //if (window.confirm(`Do you really want to delete the tournament ${payload.title}?`)) {
-      //  axios.delete(proxy + "tournaments/delete/" + payload['_id'], {
-      //    headers: { "Authorization": localStorage.getItem("ubiqumFoosballUserToken") }
-      //  })
-      //    .then(() => {
-      //      context.dispatch("fetchTournamentList");
-      //    })
-      //    .catch(error => {
-      //      alert(error.response.data.message);
-      //    });
-      //}
+      if (window.confirm(`Do you really want to delete the tournament ${payload.title}?`)) {
+        axios.delete(proxy + "/tournaments/delete/" + payload['_id'], {
+          headers: { "Authorization": localStorage.getItem("ubiqumFoosballUserToken") }
+        })
+          .then(() => {
+            context.commit("setNotification", { type: "success", message: "Tournament deleted!" })
+            console.log("counting...")
+            setTimeout(function () {
+              console.log("...done!")
+              context.dispatch("fetchTournamentList");
+            }, 6500);
+
+          })
+          .catch(error => {
+            alert(error.response.data.message);
+          });
+      }
     }
   },
 

@@ -1,17 +1,19 @@
 <template>
-  <div class="container" @click="$router.push('/matches/' + tournament['_id'])">
-    <div>
-      <h2>{{tournament.title}}</h2>
-    </div>
-    <div class="image-row">
-      <div class="img">
-        <img src="https://i.ibb.co/sQHQtQy/team01.jpg" />
-        <!-- image will be fixed when backend completed -->
+  <div class="container">
+    <div @click="$router.push('/matches/' + tournament['_id'])">
+      <div>
+        <h2>{{tournament.title}}</h2>
       </div>
-      <div class="aligner">
-        <p class="nr aligner-item">{{teamsCount}} / 99</p>
-        <!-- max nr of teams will be fixed when backend completed -->
-        <p class="teams-joined-text aligner-item">teams joined</p>
+      <div class="image-row">
+        <div class="img">
+          <img src="https://i.ibb.co/sQHQtQy/team01.jpg" />
+          <!-- image will be fixed when backend completed -->
+        </div>
+        <div class="aligner">
+          <p class="nr aligner-item">{{teamsCount}} / 99</p>
+          <!-- max nr of teams will be fixed when backend completed -->
+          <p class="teams-joined-text aligner-item">teams joined</p>
+        </div>
       </div>
     </div>
 
@@ -27,6 +29,7 @@
       <button type="button" class="btn">Leaderboard</button>
       <button
         :disabled="!getAuthenticatedUser"
+        @click="goToTeamCreation()"
         type="button"
         class="btn"
         :class="{'disabled-btn':!getAuthenticatedUser}"
@@ -53,7 +56,13 @@ export default {
   },
 
   methods: {
-    ...mapActions(["deleteTournament"])
+    ...mapActions(["deleteTournament"]),
+
+    goToTeamCreation() {
+      this.$router.push(
+        "/tournaments/" + this.tournament["_id"] + "/create-team"
+      );
+    }
   },
 
   computed: {
@@ -66,7 +75,7 @@ export default {
     isTournamentAdmin() {
       return (
         this.getAuthenticatedUser &&
-        this.getAuthenticatedUser["_id"] !== this.tournament.admin
+        this.getAuthenticatedUser["_id"] === this.tournament.admin
       );
     }
   }

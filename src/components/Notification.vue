@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p v-if="getNotification">
+  <div v-if="getNotification">
+    <p>
       <v-icon v-if="getNotification.type === 'error'">mdi-alert</v-icon>
       <v-icon v-if="getNotification.type === 'success'">mdi-thumb-up</v-icon>
       <v-icon v-if="getNotification.type === 'info'">mdi-information</v-icon>

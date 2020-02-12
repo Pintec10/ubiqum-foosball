@@ -45,7 +45,7 @@
                 dense
                 type="number"
                 :items="minMaxArray"
-                v-model="maxTeamNumber"
+                v-model="enteredData.maxTeamNumber"
                 label="Maximum nr. of Teams"
                 required
               ></v-select>
@@ -54,8 +54,10 @@
                 class="ma-3"
                 @click="createTournament(enteredData)"
                 :disabled="!getAuthenticatedUser"
+                :loading="loading"
               >create tournament</v-btn>
             </v-form>
+            <Notification />
           </v-col>
           <v-col class="col-1 col-md-4"></v-col>
         </v-row>
@@ -65,24 +67,69 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import axios from "axios";
+import Notification from "@/components/Notification.vue";
+const proxy = "https://enigmatic-cove-90612.herokuapp.com";
+
 export default {
   name: "createTournament",
+  components: { Notification },
+
   data() {
     return {
       enteredData: {
         title: "",
-        passcode: ""
+        passcode: "",
+        maxTeamNumber: 3
       },
-
-      tournamentTitle: "",
-      passcode: "",
-      maxTeamNumber: 3
+      loading: false
     };
   },
 
   methods: {
-    ...mapActions(["createTournament"])
+    //...mapActions(["createTournament"]),
+    ...mapMutations(["setNotification"]),
+
+    createTournament(payload) {
+      this.loading = true;
+      let encodeToURI = function(jsondata) {
+        var body = [];
+        for (var key in jsondata) {
+          var encKey = encodeURIComponent(key);
+          var encVal = encodeURIComponent(jsondata[key]);
+          body.push(encKey + "=" + encVal);
+        }
+        return body.join("&");
+      };
+
+      axios
+        .post(proxy + "/tournaments", encodeToURI(payload), {
+          headers: {
+            Authorization: localStorage.getItem("ubiqumFoosballUserToken")
+          }
+        })
+        .then(() => {
+          this.loading = false;
+          this.setNotification({
+            type: "success",
+            message: "Tournament created!"
+          });
+        })
+        .then(() => {
+          setTimeout(() => {
+            this.setNotification(null);
+            this.$router.push("/tournaments");
+          }, 2500);
+        })
+        .catch(error => {
+          this.loading = false;
+          this.setNotification({
+            type: "error",
+            message: error.response.data.message
+          });
+        });
+    }
   },
 
   computed: {

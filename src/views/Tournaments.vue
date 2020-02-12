@@ -1,5 +1,12 @@
 <template>
   <v-container>
+    <!-- celina: can you get the div below to be nice and centered on the screen? -->
+    <!-- to see it, just create a random tournament and then delete it -->
+    <div v-show="getNotification" class="notification">
+      <Notification />
+      <button type="button" @click="setNotification(null)">Close window</button>
+    </div>
+
     <v-row class="d-flex justify-space-between">
       <v-col class="col-12 titlecolumn">
         <p class="title mb-0">Tournaments</p>
@@ -44,8 +51,6 @@
       </v-col>
     </v-row>
 
-    <Notification />
-
     <div v-if="getTournamentList">
       <v-row>
         <v-col class="col-12" v-for="(tournament, i) in filteredTournamentList" :key="i">
@@ -77,7 +82,7 @@
 
 <script>
 import TournamentTile from "@/components/TournamentTile.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import Notification from "@/components/Notification.vue";
 
 export default {
@@ -98,6 +103,7 @@ export default {
 
   methods: {
     ...mapActions(["fetchTournamentList", "fetchTeamList"]),
+    ...mapMutations(["setNotification"]),
 
     tournamentTeams(tournament) {
       let teamsArray = [];
@@ -111,7 +117,12 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getTournamentList", "getTeamList", "getAuthenticatedUser"]),
+    ...mapGetters([
+      "getTournamentList",
+      "getTeamList",
+      "getAuthenticatedUser",
+      "getNotification"
+    ]),
 
     filteredTournamentList() {
       let filteredList = this.getTournamentList
@@ -138,7 +149,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #search-field {
   padding-top: 18px;
 }
@@ -172,5 +183,14 @@ export default {
 
 .titlecolumn {
   padding-bottom: 0px;
+}
+
+.notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 30vw;
+  min-height: 30vh;
+  background-color: darkgreen;
 }
 </style>

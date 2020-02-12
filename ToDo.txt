@@ -6,16 +6,20 @@
 
  * password breach on login??
 
- * -> createtourn ->deletetourn
+ * implement Matches and Leaderboard buttons in TournamentTile
 
  * substitute encodeBody in login (and elsewhere?) if it works from outside
+
+ * change join tournament/leave tournament depending on whether user is registered to it
+
+ * createTeam -> Matches -> Leaderboard(tournament)
 
 
 
 
  
 per Lluis:
-- get names of players from id
+- get names of players (and scores) from id
 - add images for tourn, teams & players
 - add max allowed nr of teams to create tournament
 - close tournament
@@ -25,12 +29,17 @@ per Lluis:
 
 
 per Celina:
-- start Tournament
+- start Tournament: need to place this function somewhere (will be admin-only)
 - should we place Tournaments filters as a bottom bar?
 - disabled button styling
+- center the div with <Notification> in Tournaments
+- add loader in Tournaments
 
 
 more:
-- is it ok that only team admin can add mate?
-- use team abbreviation?
+- joining a tournament: only by creating a team (right now it's like that)? 
+    if not, where do we place teamless player info? 
+    and where do we put the link to team creation?
+    we might use two different buttons: "join as player" and "join as team"
+    is it ok that only team admin can add mate?
 
