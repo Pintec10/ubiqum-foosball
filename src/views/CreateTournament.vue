@@ -14,7 +14,7 @@
                 color="white"
                 dense
                 type="text"
-                v-model="tournamentTitle"
+                v-model="enteredData.title"
                 label="tournamentTitle"
                 placeholder="Tournament Title"
                 required
@@ -24,7 +24,7 @@
                 color="white"
                 dense
                 type="text"
-                v-model="passcode"
+                v-model="enteredData.passcode"
                 label="passcode"
                 placeholder="Choose a Passcode"
                 required
@@ -49,7 +49,12 @@
                 label="Maximum nr. of Teams"
                 required
               ></v-select>
-              <v-btn outlined class="ma-3" @click="createNewTournament">create tournament</v-btn>
+              <v-btn
+                outlined
+                class="ma-3"
+                @click="createTournament(enteredData)"
+                :disabled="!getAuthenticatedUser"
+              >create tournament</v-btn>
             </v-form>
           </v-col>
           <v-col class="col-1 col-md-4"></v-col>
@@ -60,10 +65,16 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "createTournament",
   data() {
     return {
+      enteredData: {
+        title: "",
+        passcode: ""
+      },
+
       tournamentTitle: "",
       passcode: "",
       maxTeamNumber: 3
@@ -71,12 +82,12 @@ export default {
   },
 
   methods: {
-    createNewTournament() {
-      //put method in store? probably not necessary
-    }
+    ...mapActions(["createTournament"])
   },
 
   computed: {
+    ...mapGetters(["getAuthenticatedUser"]),
+
     minMaxArray() {
       let array = [];
       for (let i = 3; i <= 50; i++) {

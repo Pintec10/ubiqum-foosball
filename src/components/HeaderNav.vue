@@ -29,6 +29,8 @@
       class="text-uppercase text-center py-5 px-3"
     >
       <v-list-item class="d-flex justify-center">
+        <span v-if="getAuthenticatedUser">{{getAuthenticatedUser.username}}</span>
+        <span v-else>Guest</span>
         <v-btn icon @click.stop="drawer = !drawer">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -47,7 +49,8 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn outlined class="align-self-end">logout</v-btn>
+          <v-btn v-if="getAuthenticatedUser" outlined class="align-self-end" @click="logout">logout</v-btn>
+          <v-btn v-else outlined class="align-self-end" to="/login">login</v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -55,7 +58,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -72,6 +75,10 @@ export default {
         { title: "*DEMO create team", link: "/tournaments/1/create-team" } //change :itemID
       ]
     };
+  },
+
+  methods: {
+    ...mapActions(["logout"])
   },
 
   computed: {

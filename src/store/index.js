@@ -1,9 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
-//import router from '@/router'
+import router from '@/router'
 
 const proxy = "https://enigmatic-cove-90612.herokuapp.com"
+const encodeToURI = function (jsondata) {
+  var body = [];
+  for (var key in jsondata) {
+    var encKey = encodeURIComponent(key);
+    var encVal = encodeURIComponent(jsondata[key]);
+    body.push(encKey + "=" + encVal);
+  }
+  return body.join("&");
+}
 
 Vue.use(Vuex)
 
@@ -25,6 +34,10 @@ export default new Vuex.Store({
   mutations: {
     login: (state, payload) => {
       state.loggedUser = payload; //CHECK BASED ON ACTUAL JSON
+    },
+    logout: (state) => {
+      state.authenticatedUser = null; //will check when endpoint ready
+      router.push('/');
     },
     setNotification: (state, payload) => {
       payload === null
@@ -74,15 +87,23 @@ export default new Vuex.Store({
           localStorage.setItem("ubiqumFoosballUserToken", response.data.token);
           context.dispatch("fetchAuthenticatedUser");
         })
+        .then(() => {
+          router.push('/profile')
+        })
         .catch(error => {
           context.commit("setNotification", { type: "error", message: error.response.data.message });
         });
     },
 
+    logout: (context) => {
+      // will add axios when endpoint ready
+      localStorage.removeItem("ubiqumFoosballUserToken");
+      context.commit("logout");
+    },
+
     fetchAuthenticatedUser(context) {
-      let token = localStorage.getItem("ubiqumFoosballUserToken");
       axios.get(proxy + "/auth/currentUser", {
-        headers: { "Authorization": token }
+        headers: { "Authorization": localStorage.getItem("ubiqumFoosballUserToken") }
       })
         .then(response => {
           context.commit("setAuthenticatedUser", response.data.user);
@@ -94,7 +115,6 @@ export default new Vuex.Store({
           } else {
             errorMessage = "Could not get current user"
           }
-          //context.commit("setNotification", { type: "error", message: error.response.data.message });
           alert(errorMessage);
         });
     },
@@ -129,6 +149,33 @@ export default new Vuex.Store({
           }
           context.commit("setNotification", { type: "error", message: errorMessage });
         })
+    },
+
+    createTournament(context, payload) {
+      axios.post(proxy + "/tournaments", encodeToURI(payload), {
+        headers: { "Authorization": localStorage.getItem("ubiqumFoosballUserToken") }
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error.response.data.message);
+        })
+    },
+
+    deleteTournament() {
+      console.log("deleting tournament")
+      //if (window.confirm(`Do you really want to delete the tournament ${payload.title}?`)) {
+      //  axios.delete(proxy + "tournaments/delete/" + payload['_id'], {
+      //    headers: { "Authorization": localStorage.getItem("ubiqumFoosballUserToken") }
+      //  })
+      //    .then(() => {
+      //      context.dispatch("fetchTournamentList");
+      //    })
+      //    .catch(error => {
+      //      alert(error.response.data.message);
+      //    });
+      //}
     }
   },
 

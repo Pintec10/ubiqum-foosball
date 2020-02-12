@@ -39,31 +39,39 @@
           to="/create-tournament"
           color="white"
           class="red--text text--darken-1"
+          :disabled="!getAuthenticatedUser"
         >Create Tournament</v-btn>
       </v-col>
     </v-row>
 
     <Notification />
 
-    <v-col class="col-12">
-      <v-row v-for="(tournament, i) in filteredTournamentList" :key="i">
-        <TournamentTile
-          v-if="getTeamList"
-          :tournament="tournament"
-          :tournamentTeams="tournamentTeams(tournament)"
-        />
+    <div v-if="getTournamentList">
+      <v-row>
+        <v-col class="col-12" v-for="(tournament, i) in filteredTournamentList" :key="i">
+          <TournamentTile
+            v-if="getTeamList"
+            :tournament="tournament"
+            :tournamentTeams="tournamentTeams(tournament)"
+          />
+        </v-col>
       </v-row>
-    </v-col>
 
-    <v-row v-show="filteredTournamentList.length > 0">
-      <v-col class="col-12">
-        <v-btn
-          to="/create-tournament"
-          color="white"
-          class="red--text text--darken-1"
-        >Create Tournament</v-btn>
-      </v-col>
-    </v-row>
+      <v-row v-if="filteredTournamentList.length > 0">
+        <v-col class="col-12">
+          <v-btn
+            to="/create-tournament"
+            color="white"
+            class="red--text text--darken-1"
+            :disabled="!getAuthenticatedUser"
+          >Create Tournament</v-btn>
+        </v-col>
+      </v-row>
+    </div>
+    <div v-else>
+      Loading...
+      <!-- Celina, you can put some nice loader here! -->
+    </div>
   </v-container>
 </template>
 
@@ -103,7 +111,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getTournamentList", "getTeamList"]),
+    ...mapGetters(["getTournamentList", "getTeamList", "getAuthenticatedUser"]),
 
     filteredTournamentList() {
       let filteredList = this.getTournamentList

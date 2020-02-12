@@ -1,6 +1,5 @@
 <template>
-  <div class="container" @click="$router.push('/tournaments/detail/' + tournament.id)">
-    tile
+  <div class="container" @click="$router.push('/matches/' + tournament['_id'])">
     <div>
       <h2>{{tournament.title}}</h2>
     </div>
@@ -17,16 +16,28 @@
     </div>
 
     <div id="btns">
-      <button type="button" class="btn">Cancel</button>
+      <button
+        :disabled="!isTournamentAdmin"
+        type="button"
+        class="btn"
+        :class="{'disabled-btn':!isTournamentAdmin}"
+        @click="deleteTournament(tournament)"
+      >Cancel</button>
       <button type="button" class="btn">Matches</button>
       <button type="button" class="btn">Leaderboard</button>
-      <button type="button" class="btn">Join</button>
+      <button
+        :disabled="!getAuthenticatedUser"
+        type="button"
+        class="btn"
+        :class="{'disabled-btn':!getAuthenticatedUser}"
+      >Join</button>
     </div>
     <hr />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "tournamentTile",
 
@@ -41,9 +52,22 @@ export default {
     };
   },
 
+  methods: {
+    ...mapActions(["deleteTournament"])
+  },
+
   computed: {
+    ...mapGetters(["getAuthenticatedUser"]),
+
     teamsCount() {
       return this.tournamentTeams.length;
+    },
+
+    isTournamentAdmin() {
+      return (
+        this.getAuthenticatedUser &&
+        this.getAuthenticatedUser["_id"] !== this.tournament.admin
+      );
     }
   }
 };
@@ -103,6 +127,12 @@ hr {
   text-transform: uppercase;
   border-radius: 5%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* celina: style this as you please! */
+.disabled-btn {
+  background-color: grey;
+  color: white;
 }
 
 .image-row {

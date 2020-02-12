@@ -1,3 +1,36 @@
- * Logout
+ * Logout (add axios)
 
  * upload picture in CreateAccount
+
+ * implement maxTeamNumber & picture in createTournament when backend ready
+
+ * password breach on login??
+
+ * -> createtourn ->deletetourn
+
+ * substitute encodeBody in login (and elsewhere?) if it works from outside
+
+
+
+
+ 
+per Lluis:
+- get names of players from id
+- add images for tourn, teams & players
+- add max allowed nr of teams to create tournament
+- close tournament
+- leave team
+- create team with 2 people already?
+- logout?
+
+
+per Celina:
+- start Tournament
+- should we place Tournaments filters as a bottom bar?
+- disabled button styling
+
+
+more:
+- is it ok that only team admin can add mate?
+- use team abbreviation?
+

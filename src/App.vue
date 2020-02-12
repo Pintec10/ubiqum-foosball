@@ -9,6 +9,7 @@
 
 <script>
 import HeaderNav from "./components/HeaderNav";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -19,7 +20,21 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+
+  methods: {
+    ...mapActions(["fetchAuthenticatedUser"])
+  },
+
+  computed: {
+    ...mapGetters(["getAuthenticatedUser"])
+  },
+
+  created() {
+    if (localStorage.getItem("ubiqumFoosballUserToken")) {
+      this.fetchAuthenticatedUser();
+    }
+  }
 };
 </script>
 
