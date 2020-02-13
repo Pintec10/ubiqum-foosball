@@ -14,18 +14,24 @@
 
  * createTeam -> Matches -> Leaderboard(tournament)
 
+ * if team is to be created only with both members, add "required" to teammate field in CreateTeam
+
 
 
 
  
 per Lluis:
-- get names of players (and scores) from id
-- add images for tourn, teams & players
-- add max allowed nr of teams to create tournament
-- close tournament
-- leave team
-- create team with 2 people already?
-- logout?
+
+(more important)
+--- get names of players (and scores) from id
+--- where do I find the matches?
+--- endpoint to create a team with 2 people AND register them to the tournament
+
+(less important)
+- add support to upload images for tournament, teams & players
+- add a max allowed nr of teams when creating tournament (if we want that)
+- close tournament endpoint
+- logout endpoint
 
 
 per Celina:
@@ -37,9 +43,24 @@ per Celina:
 
 
 more:
-- joining a tournament: only by creating a team (right now it's like that)? 
-    if not, where do we place teamless player info? 
-    and where do we put the link to team creation?
-    we might use two different buttons: "join as player" and "join as team"
-    is it ok that only team admin can add mate?
+- We should agree on the dynamics of joining a tournament and creating a team
+With current backend endpoints, it is a 4-steps process:
+    1. user joins tournament
+    2. user creates team in that tournament
+    3. teammate joins tournament
+    4. user adds teammate to team
+
+With the current wireframes, it is seen as a 1-step process:
+    1. user joins tournament by creating a team which already includes a team-mate
+    This however does not support existence of teamless players.
+
+    If we want to include teamless player support, we need to modify the wireframes:
+        * have different buttons to join as solo player and to create a team (now we have only a "join" button)
+        * include a new view to add a player to an existing team
+        * perhaps add a view with a list of teamless players?
+    If we decide to use the logic of joining tournament only with a full team, it would be best to modify the team creation back-end to:
+        * add a teammate field 
+        * perhaps register the team creator and teammate automatically to the tournament? 
+        (or I could just make 4 axios calls...)
+  
 

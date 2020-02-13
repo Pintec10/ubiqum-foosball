@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div @click="$router.push('/matches/' + tournament['_id'])">
+    <div>
       <div>
         <h2>{{tournament.title}}</h2>
       </div>
@@ -25,7 +25,11 @@
         :class="{'disabled-btn':!isTournamentAdmin}"
         @click="deleteTournament(tournament)"
       >Cancel</button>
-      <button type="button" class="btn">Matches</button>
+      <button
+        type="button"
+        class="btn"
+        @click="$router.push('/matches/' + tournament['_id'])"
+      >Matches</button>
       <button type="button" class="btn">Leaderboard</button>
       <button
         :disabled="!getAuthenticatedUser"

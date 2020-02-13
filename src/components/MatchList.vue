@@ -16,7 +16,7 @@ export default {
   name: "matchList",
   props: {
     tournamentData: {
-      type: Object
+      type: Array
     }
   },
   components: {

@@ -120,7 +120,7 @@ export default {
           setTimeout(() => {
             this.setNotification(null);
             this.$router.push("/tournaments");
-          }, 2500);
+          }, 2000);
         })
         .catch(error => {
           this.loading = false;

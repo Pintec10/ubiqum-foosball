@@ -37,7 +37,8 @@ const routes = [
   {
     path: '/tournaments/:itemID/create-team', // itemID = {tournament id}
     name: 'createTeam',
-    component: CreateTeam
+    component: CreateTeam,
+    props: true
   },
   {
     path: '/tournaments',
