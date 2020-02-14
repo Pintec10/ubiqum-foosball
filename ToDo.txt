@@ -16,6 +16,8 @@
 
  * if team is to be created only with both members, add "required" to teammate field in CreateTeam
 
+ * matches: be sure to have a message if there are no matches to view
+
 
 
 

@@ -9,7 +9,7 @@ email: roberto@email.com
 password: roberto
 bearer token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTNjMjg5NmM0NGEyNzAwMTcwZTM3ZWIiLCJpYXQiOjE1ODEwMDA4NTQsImV4cCI6MTU4MTA4NzI1NH0.oynLXfMOLri03uHfV74r8jL0Im1Efgn73-cZXFfyUB8
 
-username: Celina M
+username: Celina K
 email: celina@email.com
 password: celina
 bearer token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTNjMmU2NWM0NGEyNzAwMTcwZTM3ZjYiLCJpYXQiOjE1ODEwMDI0ODgsImV4cCI6MTU4MTA4ODg4OH0.vvazGvGR2tx0d1EbNZs8JzJDbXbRcLh4YL2an85jsNI

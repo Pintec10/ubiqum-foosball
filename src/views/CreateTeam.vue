@@ -20,7 +20,7 @@
               <p>Choose team name</p>
             </label>
             <input
-              v-model="newTeamData.name"
+              v-model="newTeamData.teamName"
               type="text"
               name="teamName"
               id="teamName"
@@ -31,10 +31,10 @@
           </div>
           <div>
             <label for="teamAbbr">
-              <p>Choose team name abbreviation</p>
+              <p>Choose team name abbreviation (3 chars)</p>
             </label>
             <input
-              v-model="newTeamData.abbr"
+              v-model="newTeamData.teamAbbr"
               type="text"
               name="teamAbbr"
               id="teamAbbr"
@@ -45,10 +45,10 @@
           </div>
           <div>
             <label for="teamMate">
-              <p>Choose team mate</p>
+              <p>Team mate username</p>
             </label>
             <input
-              v-model="teamMate"
+              v-model="newTeamData.teamMateUsername"
               type="text"
               name="teamMate"
               id="teamMate"
@@ -81,11 +81,10 @@ export default {
   data() {
     return {
       newTeamData: {
-        name: "",
-        abbr: ""
-      },
-
-      teamMate: ""
+        teamName: "",
+        teamAbbr: "",
+        teamMateUsername: ""
+      }
     };
   },
 
@@ -106,13 +105,9 @@ export default {
         return body.join("&");
       }
 
-      console.log("newTeamData:");
-      console.log(this.newTeamData);
-      console.log("encoded: " + encodetoURI(this.newTeamData));
-
       axios
-        .post(
-          proxy + "/teams/create/" + tournamentId,
+        .put(
+          proxy + "/tournaments/joinwithteam/" + tournamentId,
           encodetoURI(this.newTeamData),
           {
             headers: {
@@ -121,34 +116,19 @@ export default {
             }
           }
         )
-        .then(() => {
-          if (this.teamMate) {
-            this.addTeamMate();
-          } else {
-            this.setNotification({
-              type: "success",
-              message: "Team successfully created!"
-            });
-            setTimeout(() => {
-              this.$router.push(
-                proxy + "/matches/" + this.$route.params.itemID
-              );
-            }, 2000);
-          }
+        .then(response => {
+          console.log(response);
+          setTimeout(() => {
+            this.$router.push(proxy + "/matches/" + tournamentId);
+          }, 2000);
         })
         .catch(error => {
+          console.log(error.response.data);
           this.setNotification({
             type: "error",
-            message: error.response.data.messag
+            message: error.response.data.message
           });
         });
-    },
-
-    addTeamMate() {
-      console.log("adding team mate...");
-      setTimeout(() => {
-        this.$router.push(proxy + "/tournaments/" + this.$router.params.itemID);
-      }, 2000);
     }
   }
 };
